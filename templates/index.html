@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block body_content %}
+      {% for note in notes %}
+        <div class="mt-2 p-3" style="background: lightcyan;">
+          <h1 class="d-inline mr-2">{{ note[1] }}</h1>
+          <span class="text-muted"> {{ note[6].date() }} </span>
+          <p class="m-1">{{ note[2] }}</p>
+          <hr class="my-1">
+          <div class="row justify-content-end">
+            <a href="{{ url_for('update', id=note.id) }}" class="btn btn-primary mr-2">Edit</a>
+            
+            <form action="{{ url_for('delete') }}" method="post">
+                <input type="hidden" name="id" value="{{ note.id }}">
+                <button type="submit" class="btn btn-danger">Delete</button>
+            </form>
+            
+          </div>
+        </div>
+      {% endfor %}
+{% endblock body_content %}
